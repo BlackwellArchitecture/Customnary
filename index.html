@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customnary — Professional Dictionary Definition Generator</title>
+    <!-- Premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Crimson+Pro:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Control Panel (Sidebar) -->
+        <aside class="control-panel">
+            <header class="app-header">
+                <div class="logo">
+                    <span class="logo-icon"><i class="fa-solid fa-book-open-reader"></i></span>
+                    <h1>Customnary</h1>
+                </div>
+                <p class="subtitle">Create elegant, print-style dictionary definitions</p>
+            </header>
+
+            <div class="sections-container">
+                <!-- Section 1: Definition Content -->
+                <section class="control-section">
+                    <div class="section-header-row">
+                        <h2 class="section-title"><i class="fa-solid fa-pen-nib"></i> Definition Details</h2>
+                        <button type="button" id="btn-clear" class="btn-clear" title="Clear all text fields"><i class="fa-solid fa-trash-can"></i> Clear All</button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="label-row">
+                            <label for="input-word">Word / Phrase</label>
+                            <button type="button" id="btn-ipa-translate" class="btn-link-action" title="Translate word to IPA"><i class="fa-solid fa-language"></i> IPA Translate</button>
+                        </div>
+                        <input type="text" id="input-word" placeholder="e.g. Serendipity" value="Serendipity">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group flex-2">
+                            <label for="input-ipa">Pronunciation (IPA)</label>
+                            <input type="text" id="input-ipa" placeholder="e.g. /ˌserənˈdipədē/" value="/ˌserənˈdɪp.ɪ.ti/">
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="input-pos">Part of Speech</label>
+                            <select id="input-pos">
+                                <option value="noun" selected>noun</option>
+                                <option value="verb">verb</option>
+                                <option value="adjective">adjective</option>
+                                <option value="adverb">adverb</option>
+                                <option value="conjunction">conjunction</option>
+                                <option value="preposition">preposition</option>
+                                <option value="interjection">interjection</option>
+                                <option value="pronoun">pronoun</option>
+                                <option value="custom">custom...</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group hidden" id="custom-pos-container">
+                        <label for="input-custom-pos">Custom Part of Speech</label>
+                        <input type="text" id="input-custom-pos" placeholder="e.g. noun phrase">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-definition">Definition</label>
+                        <textarea id="input-definition" rows="4" placeholder="Enter the core meaning...">The occurrence and development of events by chance in a happy or beneficial way; a fortunate stroke of luck.</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-examples">Examples <span class="help-text">(One per line)</span></label>
+                        <textarea id="input-examples" rows="3" placeholder="e.g. We found the charming little restaurant by pure serendipity.">We found the charming little restaurant by pure serendipity.
+A fortunate stroke of serendipity led him to the discovery of penicillin.</textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="input-synonyms">Synonyms <span class="help-text">(comma separated)</span></label>
+                            <input type="text" id="input-synonyms" placeholder="e.g. coincidence, fortuity, luck" value="fluke, fortuity, providence, happy accident">
+                        </div>
+                        <div class="form-group">
+                            <label for="input-antonyms">Antonyms <span class="help-text">(comma separated)</span></label>
+                            <input type="text" id="input-antonyms" placeholder="e.g. design, misfortune" value="misfortune, bad luck, design">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-etymology">Etymology / Origin <span class="help-text">(Optional)</span></label>
+                        <input type="text" id="input-etymology" placeholder="e.g. Mid 18th century: coined by Horace Walpole" value="Mid 18th century: coined by Horace Walpole from the Persian fairy tale 'The Three Princes of Serendip'">
+                    </div>
+                </section>
+
+                <!-- Section 2: Aesthetics & Layout -->
+                <section class="control-section">
+                    <h2 class="section-title"><i class="fa-solid fa-sliders"></i> Aesthetics & Style</h2>
+                    
+                    <div class="form-group">
+                        <label>Select Premium Theme</label>
+                        <div class="theme-grid">
+                            <button type="button" class="theme-btn active" data-theme="classic" title="Classic Editorial">
+                                <span class="theme-swatch" style="background: linear-gradient(135deg, #FAF7F0 50%, #111111 50%); border: 1px solid #d3cfc7;"></span>
+                                <span class="theme-name">Classic</span>
+                            </button>
+                            <button type="button" class="theme-btn" data-theme="dark-academic" title="Dark Academic">
+                                <span class="theme-swatch" style="background: linear-gradient(135deg, #1E2322 50%, #E5DCCB 50%);"></span>
+                                <span class="theme-name">Academic</span>
+                            </button>
+                            <button type="button" class="theme-btn" data-theme="modern-slate" title="Modern Slate">
+                                <span class="theme-swatch" style="background: linear-gradient(135deg, #F4F5F6 50%, #2A2F35 50%); border: 1px solid #d3cfc7;"></span>
+                                <span class="theme-name">Slate</span>
+                            </button>
+                            <button type="button" class="theme-btn" data-theme="midnight-gold" title="Midnight Gold">
+                                <span class="theme-swatch" style="background: linear-gradient(135deg, #0A1128 50%, #D4AF37 50%);"></span>
+                                <span class="theme-name">Midnight</span>
+                            </button>
+                            <button type="button" class="theme-btn" data-theme="sakura-minimal" title="Sakura Minimal">
+                                <span class="theme-swatch" style="background: linear-gradient(135deg, #FFF5F5 50%, #4A1525 50%);"></span>
+                                <span class="theme-name">Sakura</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="select-aspect-ratio">Card Size</label>
+                            <select id="select-aspect-ratio">
+                                <option value="auto">Auto Height</option>
+                                <option value="square" selected>1:1 Square (Socials)</option>
+                                <option value="portrait">4:5 Portrait</option>
+                                <option value="story">9:16 Story</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="select-border">Border Style</label>
+                            <select id="select-border">
+                                <option value="double-thin" selected>Double Editorial</option>
+                                <option value="thick-frame">Thick Border</option>
+                                <option value="ornate">Ornate Frame</option>
+                                <option value="minimal">Minimal Accent</option>
+                                <option value="none">No Border</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="select-font-family">Primary Serif Font</label>
+                            <select id="select-font-family">
+                                <option value="font-garamond" selected>EB Garamond (Classic)</option>
+                                <option value="font-playfair">Playfair Display (Elegant)</option>
+                                <option value="font-crimson">Crimson Pro (Scholarly)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-custom-header">Header / Book Title</label>
+                            <input type="text" id="input-custom-header" placeholder="e.g. CUSTOMNARY" value="THE NEW DICTIONARY">
+                        </div>
+                    </div>
+
+                    <div class="form-group slider-group">
+                        <div class="slider-label">
+                            <label for="range-font-size">Base Text Size</label>
+                            <span class="slider-val" id="val-font-size">18px</span>
+                        </div>
+                        <input type="range" id="range-font-size" min="14" max="24" value="18" step="1">
+                    </div>
+
+                    <div class="form-group slider-group">
+                        <div class="slider-label">
+                            <label for="range-padding">Card Padding</label>
+                            <span class="slider-val" id="val-padding">48px</span>
+                        </div>
+                        <input type="range" id="range-padding" min="24" max="80" value="48" step="4">
+                    </div>
+
+                    <div class="form-row flex-align-center">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="check-texture" checked>
+                            <label for="check-texture"><i class="fa-solid fa-scroll"></i> Paper Texture Effect</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="check-header" checked>
+                            <label for="check-header"><i class="fa-solid fa-heading"></i> Show Page Headers</label>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Action Area -->
+            <footer class="export-actions">
+                <button type="button" class="btn btn-primary" id="btn-download-png">
+                    <span class="btn-icon"><i class="fa-solid fa-file-image"></i></span> Download PNG
+                </button>
+                <button type="button" class="btn btn-secondary" id="btn-download-jpg">
+                    <span class="btn-icon"><i class="fa-regular fa-file-image"></i></span> Download JPEG
+                </button>
+                <button type="button" class="btn btn-secondary" id="btn-copy-clipboard">
+                    <span class="btn-icon"><i class="fa-regular fa-clipboard"></i></span> Copy Image
+                </button>
+            </footer>
+        </aside>
+
+        <!-- Preview Area -->
+        <main class="preview-area">
+            <div class="preview-sticky-container">
+                <div class="preview-header">
+                    <span class="preview-tag">Live Canvas Preview</span>
+                    <span class="quality-tag"><i class="fa-solid fa-circle-check"></i> Exporting at 3x resolution</span>
+                </div>
+                
+                <!-- Definition Card Wrapper (This is captured by html2canvas) -->
+                <div class="definition-card-container aspect-square" id="capture-card">
+                    <!-- SVG Noise Filter overlay for realistic paper texture -->
+                    <div class="paper-texture-overlay"></div>
+                    
+                    <div class="definition-card-inner border-double-thin font-garamond" id="card-inner">
+                        <!-- Dictionary Page Header -->
+                        <div class="card-book-header" id="card-book-header">
+                            <span class="guide-word-left" id="lbl-guide-left">SERENDIPITY</span>
+                            <span class="book-title" id="lbl-book-title">THE NEW DICTIONARY</span>
+                            <span class="page-number" id="lbl-page-num">489</span>
+                        </div>
+
+                        <!-- Main Dictionary Content -->
+                        <div class="card-content-wrapper">
+                            <div class="word-header-row">
+                                <span class="word-title" id="lbl-word">Serendipity</span>
+                                <span class="word-pronunciation" id="lbl-ipa">/ˌserənˈdɪp.ɪ.ti/</span>
+                            </div>
+
+                            <div class="definition-block">
+                                <span class="word-pos" id="lbl-pos">noun</span>
+                                <span class="definition-text" id="lbl-definition">The occurrence and development of events by chance in a happy or beneficial way; a fortunate stroke of luck.</span>
+                            </div>
+
+                            <!-- Example Sentences -->
+                            <div class="examples-container" id="lbl-examples-container">
+                                <div class="example-item">
+                                    <span class="bullet">•</span>
+                                    <span class="example-text">We found the charming little restaurant by pure serendipity.</span>
+                                </div>
+                                <div class="example-item">
+                                    <span class="bullet">•</span>
+                                    <span class="example-text">A fortunate stroke of serendipity led him to the discovery of penicillin.</span>
+                                </div>
+                            </div>
+
+                            <!-- Synonyms & Antonyms -->
+                            <div class="thesaurus-container" id="lbl-thesaurus-container">
+                                <div class="thesaurus-row" id="lbl-synonyms-row">
+                                    <span class="thesaurus-label">Synonyms:</span>
+                                    <span class="thesaurus-words" id="lbl-synonyms">fluke, fortuity, providence, happy accident</span>
+                                </div>
+                                <div class="thesaurus-row" id="lbl-antonyms-row">
+                                    <span class="thesaurus-label">Antonyms:</span>
+                                    <span class="thesaurus-words" id="lbl-antonyms">misfortune, bad luck, design</span>
+                                </div>
+                            </div>
+
+                            <!-- Etymology Section -->
+                            <div class="etymology-container" id="lbl-etymology-container">
+                                <span class="etymology-text" id="lbl-etymology">[Mid 18th century: coined by Horace Walpole from the Persian fairy tale 'The Three Princes of Serendip']</span>
+                            </div>
+                        </div>
+
+                        <!-- Tiny footer logo or guide lines to make it feel authentic -->
+                        <div class="card-footer-branding">
+                            <span class="decor-dot"></span>
+                            <span class="branding-text">Customnary Editorial</span>
+                            <span class="decor-dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- html2canvas library for high fidelity canvas rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
